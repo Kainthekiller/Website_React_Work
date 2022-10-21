@@ -10,8 +10,8 @@ import MovieDetails from "./Component/MovieDetails";
 function App() {
 
     //Use State
-        const [multipleView, setMultipleView] = useState(true)
-
+    const [multipleView, setMultipleView] = useState(true)
+    const [movieList, setMovieList] = useState([]);  //Main Movie List
     const [singleMovie, setSingleMovie] = useState({}) //Single Empty Object
 
     // const [singleView,setSingleView] = useState(true);
@@ -24,11 +24,12 @@ function App() {
 
     <div className="App">
 
-        <SearchAppBar multipleViewStatus={setMultipleView}/>
-        {multipleView ? <MovieList multipleViewStatus={setMultipleView} setSingleMovie={setSingleMovie} /> : <MovieDetails setSingleMovie={setSingleMovie} multipleViewStatus={setMultipleView} singleMovie={singleMovie}/>}
+        <SearchAppBar multipleViewStatus={setMultipleView} movieList={movieList} setMovieList={setMovieList}/>
+        {multipleView ? <MovieList movieList={movieList} setMovieList={setMovieList} multipleViewStatus={setMultipleView} setSingleMovie={setSingleMovie} /> : <MovieDetails setSingleMovie={setSingleMovie} multipleViewStatus={setMultipleView} singleMovie={singleMovie}/>}
         {/*<MovieDetails />*/}
         {/*<MovieList singleView={singleView} setSingleView={setSingleView(true)} />*/}
         {/*<MovieList />*/}
+
 
     </div>
   );

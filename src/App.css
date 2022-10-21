@@ -46,5 +46,28 @@
   border-color: white;
   float: left;
 }
+.BTNGroup
+{
+  float: left;
+  padding-top: 50px;
+}
+
+.SubmitReview
+{
+
+
+  vertical-align: before-edge;
+  line-height: 50px;
+  width: 150px;
+}
+.inputReview
+{
+
+  margin-top: 10px;
+  margin-bottom: 10px;
+  width: 150px;
+  height: 50px;
+ margin-right: 50px;
+}
 
 

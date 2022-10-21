@@ -7,7 +7,7 @@ import MovieDetails from "./MovieDetails";
 export default function MovieList(props) {
 
     //Use State Goes here
-    const [movieList, setMovieList] = useState([]);
+
 
     //Hold a Whole Single Movie
 
@@ -16,7 +16,7 @@ export default function MovieList(props) {
         fetch("http://localhost:3001/movies/")
             .then(res => res.json())
             .then(data => {
-               setMovieList(data)
+               props.setMovieList(data)
             })
 
          // console.log(movieList)
@@ -36,8 +36,8 @@ export default function MovieList(props) {
 
     return (
         <ImageList >
-            {movieList.map((item) => (
-                <ImageListItem key={item.poster}>
+            {props.movieList.map((item) => (
+                <ImageListItem key={item.movieId}>
                     <img onClick={() =>
                     {
                         props.setSingleMovie(item)

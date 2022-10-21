@@ -2,6 +2,8 @@ import * as React from "react";
 import {useEffect, useState} from "react";
 import ImageListItem from "@mui/material/ImageListItem";
 import ImageList from "@mui/material/ImageList";
+import {Button} from "@mui/material";
+import Review from "./Review";
 
 
 
@@ -46,6 +48,7 @@ export default function MovieDetails(props) {
                             alt={selectedMovie.movieId}
                             loading="lazy"
                         />
+        <Review singleMovieExtra={props.singleMovie} ></Review>
                     </ImageListItem>
 
             </ImageList>

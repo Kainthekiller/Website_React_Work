@@ -11,6 +11,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import {Button} from "@mui/material";
 import {ButtonGroup} from "@mui/material";
 import {createTheme} from "@mui/material/styles";
+import {useState} from "react";
 
 
 const Search = styled('div')(({ theme }) => ({
@@ -67,9 +68,37 @@ const theme = createTheme({
 
 
 export default function SearchAppBar(props) {
+    const [searchedItem, setSearchedItem] = useState("")
+    function searchMovie(e)
+    {
+        e.preventDefault()
+        //Fetch
+        fetch(`http://localhost:3001/search?query=${searchedItem}` )
+            .then(response => response.json())
+            .then((responseDate) =>
+            {
+                props.setMovieList(responseDate);
+            })
+        console.log(searchedItem)
+
+    }
+
+    //retrieve all movies from server
+    function fetchMovieList() {
+        fetch("http://localhost:3001/movies/")
+            .then(res => res.json())
+            .then(data => {
+                props.setMovieList(data)
+            })
+
+        // console.log(movieList)
+    }
+
+
+
     return (
         <Box sx={{ flexGrow: 1 }}>
-            <AppBar position="static">
+            <AppBar position="static" sx={{background: "black" , height: "75px"}}>
                 <Toolbar>
                     <IconButton
                         size="large"
@@ -87,9 +116,9 @@ export default function SearchAppBar(props) {
                         sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
                     >
                         <h1 className={"GMDB"}>GMDB</h1>
-                        <ButtonGroup variant="text"
+                        <ButtonGroup className={"BTNGroup"} variant="text"
                         aria-label="outlined button group">
-                            <Button onClick={() => {props.multipleViewStatus(true)}}  sx={{ color: 'white', borderColor: 'white' }}>Home</Button>
+                            <Button onClick={() => {{{fetchMovieList()}} {props.multipleViewStatus(true)}}} sx={{ color: 'white', borderColor: 'white' }}>Home</Button>
                             <Button onClick={() => console.log("Click")}  sx={{ color: 'white', borderColor: 'white' }}>Login</Button>
                         </ButtonGroup>
                     </Typography>
@@ -97,10 +126,14 @@ export default function SearchAppBar(props) {
                         <SearchIconWrapper>
                             <SearchIcon />
                         </SearchIconWrapper>
+                        <form onSubmit={ (e) => searchMovie(e)}>
                         <StyledInputBase
                             placeholder="Search…"
                             inputProps={{ 'aria-label': 'search' }}
+                            onChange={(e) => {setSearchedItem(e.target.value)}}
                         />
+                        </form>
+
                     </Search>
                 </Toolbar>
             </AppBar>
